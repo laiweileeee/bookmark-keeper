@@ -9,7 +9,7 @@ const bookmarksContainer = document.getElementById('bookmarks-container');
 let bookmarks = [];
 
 // Show Modal, Focus on Input
-function showModal () {
+function showModal() {
     modal.classList.add('show-modal');
     // cursor on the first line automatically
     websiteNameEl.focus();
@@ -17,9 +17,9 @@ function showModal () {
 
 // Modal Event Listeners
 modalShow.addEventListener('click', showModal);
-modalClose.addEventListener('click', () => {modal.classList.remove('show-modal')});
+modalClose.addEventListener('click', () => { modal.classList.remove('show-modal') });
 // close modal by clicking anywhere outside the modal
-window.addEventListener('click', (e) => {e.target === modal ? modal.classList.remove('show-modal') : false });
+window.addEventListener('click', (e) => { e.target === modal ? modal.classList.remove('show-modal') : false });
 
 //Validate Form using Regex expression
 function validate(nameValue, urlValue) {
@@ -31,7 +31,7 @@ function validate(nameValue, urlValue) {
         return false;
     }
     //if invalid url, spaces between etc
-    if(!urlValue.match(regex)) {
+    if (!urlValue.match(regex)) {
         alert('Please provide a valid web address');
         return false;
     }
@@ -109,7 +109,9 @@ function storeBookmark(e) {
     const nameValue = websiteNameEl.value;
     let urlValue = websiteUrlEl.value;
     if (!urlValue.includes('http://', 'https://')) {
-        urlValue = `https://${urlValue}`;
+        if (!urlValue.includes('https://', 'https://')) {
+            urlValue = `https://${urlValue}`;
+        }
     }
     // Validate inputs, break if invalid, skip if valid
     if (!validate(nameValue, urlValue)) {
